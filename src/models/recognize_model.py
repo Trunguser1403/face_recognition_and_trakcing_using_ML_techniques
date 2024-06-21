@@ -21,12 +21,12 @@ def save_model(model, path:str):
 
 
 class Face_Recognition(SVC):
-    
+
     def __init__(self) -> None:
-        super().__init__(kernel='linear', probability=True)
+        super().__init__(kernel="linear", probability=True)
         self.pca_transf = PCA()
         self.input_img = (128, 128)
-        self.threshold = 0.45
+        self.threshold = 0.4
     
     def _reshape_img(self, img):
         return resize(img, self.input_img)
@@ -42,7 +42,8 @@ class Face_Recognition(SVC):
 
             if name_prob < self.threshold:
                 name = "Unknown"
-            recog_faces.append([x1, y1, x2, y2, f"{name_prob:.2f}", name])
+                name_prob = 0.99
+            recog_faces.append([[x1, y1, x2-x1, y2 - y1], f"{name_prob:.2f}", name])
 
         return recog_faces
     
