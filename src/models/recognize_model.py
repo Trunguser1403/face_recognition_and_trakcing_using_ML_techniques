@@ -9,8 +9,6 @@ from sklearn.decomposition import PCA
 from src.preprocessing.extract_feature import extract_lbp_features, extract_hog_features
 
 
-
-    
 def load_model(path:str):
     with open(path, 'rb') as file:
         return pickle.load(file)
@@ -42,7 +40,7 @@ class Face_Recognition(SVC):
 
             if name_prob < self.threshold:
                 name = "Unknown"
-                name_prob = 0.99
+                name_prob = 0
             recog_faces.append([[x1, y1, x2-x1, y2 - y1], f"{name_prob:.2f}", name])
 
         return recog_faces
