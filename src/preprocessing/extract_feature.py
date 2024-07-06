@@ -12,8 +12,8 @@ def extract_hog_features(image):
                        block_norm="L2-Hys")
     return hog_features
 
-def extract_lbp_features(image, radius=2, n_points=8, eps = 1e-7) -> np.ndarray:
-    lbp_features = local_binary_pattern(image, n_points*radius, radius, method='uniform')
+def extract_lbp_features(image, radius=8, n_points=24, eps = 1e-7) -> np.ndarray:
+    lbp_features = local_binary_pattern(image, n_points, radius, method='uniform')
     hist, _ = np.histogram(lbp_features.ravel(),
                            bins=np.arange(0, n_points + 3),
                            range=(0, n_points + 2))
